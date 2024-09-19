@@ -5,7 +5,9 @@ public class App {
         Scanner choiseScanner = new Scanner(System.in);
         int choise = 0;
         int currentBalance = 0;
-        while (choise != 4){ ;
+
+        while (choise != 4){ 
+
         System.out.println("Greetings customer to the bank");
         System.out.print("Would you like to:");
         
@@ -15,6 +17,7 @@ public class App {
         System.out.println("Quit your bank application?: Press 4");
 
         choise = choiseScanner.nextInt();
+        choiseScanner.close();
 
         switch (choise) {
             case 1: 
@@ -22,15 +25,12 @@ public class App {
             break;
 
             case 2: 
-            int deposit = deposit();
-            
-            int sum = deposit + currentBalance;
-            currentBalance = sum;
-            checkMyBalance(currentBalance);
+            deposit(currentBalance);
+
             break;
 
             case 3:
-            witdraw();
+            //witdraw(currentBalance);
             break;
 
             case 4:
@@ -50,18 +50,29 @@ public class App {
     }
 
   //kod för ta in input, lägga till inputen på publika klassen currentBAlance och sedan stänga scannern     
-    public static int deposit() {
-        System.out.println("How mutch would you like to deposit to your account?");
+    public static int deposit(int currentBalance) {
         Scanner depositScanner = new Scanner(System.in);
-        int deposit = depositScanner.nextInt();
+        System.out.println("How mutch would you like to deposit to your account?");
+        int dep = depositScanner.nextInt();
+        System.out.println("You deposited "+ dep+ "Sek. on your account.");
+        currentBalance += dep;
+
         depositScanner.close();
-        System.out.println("You deposited "+ deposit+ "Sek. on your account.");
-        return deposit;
+        return currentBalance;
     }   
 
-    public static void witdraw() {
-        System.out.println("How mutch would you like to witdraw to your account?");
-        //witdraw = input.nextInt();
+    public static int witdraw(int currentBalance) {
+       Scanner witScanner = new Scanner(System.in);
+      System.out.println("How mutch would you like to witdraw to your account?");
+       int wit = witScanner.nextInt();
+
+        if (wit >= currentBalance) {
+            System.out.println("You don´t have enough funds on your account");
+        }else{
+            currentBalance -= wit;
+        }
+        witScanner.close();
+        return currentBalance;
     }
 
     public static void quit() {
