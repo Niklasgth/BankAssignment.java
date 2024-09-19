@@ -40,7 +40,7 @@ public class App {
 
             default: System.out.println("Invalid command pleace choose 1-4");
                 break;
-            }choiseScanner.close ();
+            }
         } 
     }
 
