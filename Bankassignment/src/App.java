@@ -1,6 +1,8 @@
 import java.util.Scanner;
 
 public class App {
+
+   
     public static void main(String[] args) {
         Scanner choiseScanner = new Scanner(System.in);
         int choise = 0;
@@ -10,14 +12,14 @@ public class App {
 
         System.out.println("Greetings customer to the bank");
         System.out.print("Would you like to:");
-        
+    
         System.out.println("Check your balance?: Press 1:");
         System.out.println("Deposit money?: Press 2:");
         System.out.println("Witdraw money from your account?: Press 3");
         System.out.println("Quit your bank application?: Press 4");
 
         choise = choiseScanner.nextInt();
-        choiseScanner.close();
+        
 
         switch (choise) {
             case 1: 
@@ -26,30 +28,26 @@ public class App {
 
             case 2: 
             deposit(currentBalance);
-
             break;
 
             case 3:
-            //witdraw(currentBalance);
+            witdraw(currentBalance);
             break;
 
             case 4:
             quit();
-
             break;
 
-            default: System.out.println("Invalid command pleace choose 1-4");
+            default: System.out.println("Invalid command, pleace choose 1-4");
                 break;
             }
-        } 
+        }
     }
 
-    //en metod för kolla rådande balans
     public static void checkMyBalance(int currentBalance){
     System.out.println(" Your balance is currently at:"+currentBalance+" sek");
     }
 
-  //kod för ta in input, lägga till inputen på publika klassen currentBAlance och sedan stänga scannern     
     public static int deposit(int currentBalance) {
         Scanner depositScanner = new Scanner(System.in);
         System.out.println("How mutch would you like to deposit to your account?");
