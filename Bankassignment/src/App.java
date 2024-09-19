@@ -2,16 +2,22 @@ import java.util.Scanner;
 
 public class App {
 
-   
+    //detta borde göra variabeln tillgänglig över hela denna app
+    static int currentBalance =0;
+    
     public static void main(String[] args) {
+        //scanner för switchen
         Scanner choiseScanner = new Scanner(System.in);
         int choise = 0;
-        int currentBalance = 0;
-
+      
+        //try_ catch för fånga eventella felkoder från icke siffror
+        try {
+//while så att den hoppar ut om jag slår 4:a likt vi gjorde i övningsuppgiften
         while (choise != 4){ 
-
-        System.out.println("Greetings customer to the bank");
-        System.out.print("Would you like to:");
+            //lägger till linje för ökad läslighet
+        System.out.println("------------------------------");
+        System.out.print("Greetings customer of the bank. ");
+        System.out.println("Would you like to:");
     
         System.out.println("Check your balance?: Press 1:");
         System.out.println("Deposit money?: Press 2:");
@@ -19,19 +25,18 @@ public class App {
         System.out.println("Quit your bank application?: Press 4");
 
         choise = choiseScanner.nextInt();
-        
-
+            //mina case går direkt till metoder vilka alla drar nytta av samma 
         switch (choise) {
             case 1: 
-            checkMyBalance(currentBalance); 
+            checkMyBalance(); 
             break;
 
             case 2: 
-            deposit(currentBalance);
+            deposit();
             break;
 
             case 3:
-            witdraw(currentBalance);
+            withdraw();
             break;
 
             case 4:
@@ -42,38 +47,48 @@ public class App {
                 break;
             }
         }
+    } catch (Exception e) {
+       System.out.println("Invalid character"); }
     }
 
-    public static void checkMyBalance(int currentBalance){
-    System.out.println(" Your balance is currently at:"+currentBalance+" sek");
+    public static void checkMyBalance(){
+        System.out.println("------------------------------");
+    System.out.println(" Your current saldo is "+ currentBalance);
     }
 
-    public static int deposit(int currentBalance) {
-        Scanner depositScanner = new Scanner(System.in);
+    public static void deposit() {
+        Scanner depScanner = new Scanner(System.in);
+        System.out.println("------------------------------");
         System.out.println("How mutch would you like to deposit to your account?");
-        int dep = depositScanner.nextInt();
-        System.out.println("You deposited "+ dep+ "Sek. on your account.");
+        int dep = depScanner.nextInt();
+        System.out.println("You deposited "+ dep+ " Sek. on your account.");
         currentBalance += dep;
 
-        depositScanner.close();
-        return currentBalance;
+        System.out.println("Your current saldo is "+ currentBalance);
+        
     }   
 
-    public static int witdraw(int currentBalance) {
+    public static void withdraw() {
        Scanner witScanner = new Scanner(System.in);
-      System.out.println("How mutch would you like to witdraw to your account?");
+       System.out.println("------------------------------");
+      System.out.println("How mutch would you like to withdraw from your account?");
        int wit = witScanner.nextInt();
 
         if (wit >= currentBalance) {
-            System.out.println("You don´t have enough funds on your account");
+            System.out.println("------------------------------");
+            System.out.println("Unable to withdraw.");
+            System.out.println("You do not have enough funds on your account.");
+            System.out.println("Your current saldo is "+ currentBalance);
         }else{
             currentBalance -= wit;
+            System.out.println("------------------------------");
+            System.out.println("You witdrew " + wit+ " Sek.");
+            System.out.println("Your current saldo is "+ currentBalance);
         }
-        witScanner.close();
-        return currentBalance;
     }
 
     public static void quit() {
+        System.out.println("------------------------------");
     System.out.println("Application will now quit");
     }
 }
