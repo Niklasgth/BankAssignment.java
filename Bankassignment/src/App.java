@@ -1,6 +1,11 @@
 import java.util.Scanner;
 
+
+
 public class App {
+//tror denna variabel behöver vara publik över hela 
+public static int currentBalance = 0;
+
     public static void main(String[] args) throws Exception {
         System.out.println("Greetings customer to the bank");
         System.out.println("Would you like to?");
@@ -13,34 +18,33 @@ public class App {
        
         Scanner input = new Scanner(System.in);
         int choise = input.nextInt();
-        int balance = 0;
-        int add;
-        int witdraw;
-        int sum;
+        
+        
 
        
         while (choise != 4){ ;
         
         switch (choise) {
             case 1: 
-                System.out.println(" Your balance is currently at:"+balance);
-               
+               checkMyBalance(currentBalance); 
             break;
 
             case 2: 
-                System.out.println("How mutch would you like to deposit to your account?");
-                balance = input.nextInt();
+               
+            
+            System.out.println("How mutch would you like to deposit to your account?");
+                //balance = input.nextInt();
                
                
                 //sum = add + balance;
                 //sum = balance;
-                System.out.println("your account i now" + balance);
+                //System.out.println("your account i now" + balance);
                
                  break;
 
             case 3:
             System.out.println("How mutch would you like to witdraw to your account?");
-            witdraw = input.nextInt();
+            //witdraw = input.nextInt();
 
             break;
 
@@ -51,8 +55,10 @@ public class App {
     } System.out.println("Application will now quit");
 
     }
-
-
+    //en metod för kolla rådande balans
+    public static void checkMyBalance(int currentBalance){
+    System.out.println(" Your balance is currently at:"+currentBalance+" sek");
+    }
 
 }
 
