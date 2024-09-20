@@ -20,16 +20,19 @@ public class App {
             } catch (Exception e) {
             invalidInput();
             continue;
-       }
-         //mina case går direkt till metoder enligt  DRY.
-        switch (choise) {
+            } 
+            //mina case går direkt till metoder enligt  DRY.
+
+            switch (choise) {
             case 1: 
                 checkMyBalance(); 
             break;
+
             case 2: 
             //try/catch för icke siffror
                 try {
                      deposit();
+
                 } catch (Exception e) {
                      invalidInput();
                 continue;
@@ -39,11 +42,13 @@ public class App {
             case 3:
                  try {
                 withdraw();
+
                  } catch (Exception e) {
                 invalidInput();
                 continue;
                 }
                 
+
             break;
 
             case 4:
@@ -56,6 +61,7 @@ public class App {
             }
         } 
     }
+
     //klass för göra huvudklassen mer DRY. Lägger all text här.
     public static void introText() {
         line();
@@ -65,7 +71,7 @@ public class App {
         System.out.println("Deposit money?: Press 2:");
         System.out.println("Witdraw money from your account?: Press 3");
         System.out.println("Quit your bank application?: Press 4");
-}       
+    }       
     public static void checkMyBalance(){
         line();
         System.out.println(" Your current saldo is "+ currentBalance);
@@ -99,18 +105,22 @@ public class App {
             System.out.println("You witdrew " + wit+ " Sek.");        
         }
     }
+
     public static void quit() {
         line();
         System.out.println("Application will now quit");
     }
+
     public static void def(){
         line();
         System.out.println("Invalid command, pleace choose 1-4");
     }
+
     public static void invalidInput() {
         line();
         System.out.println("Invalid input");
-}
+    }
+
     //scanner metod för mer DRY
     public static int scan(){
         Scanner scanner = new Scanner(System.in);
