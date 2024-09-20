@@ -85,7 +85,6 @@ public class App {
                      invalidInput();
             }else{ System.out.println("You deposited "+ dep+ " Sek. on your account.");
                 currentBalance += dep;}
-        
     }   
 
     public static void withdraw() {
