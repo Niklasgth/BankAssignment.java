@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class App {
 
-    //detta borde göra variabeln tillgänglig över hela denna app
+    //detta gör variabeln tillgänglig över hela denna app
     static int currentBalance =0;
     
     public static void main(String[] args) {
@@ -11,11 +11,17 @@ public class App {
       
         //while loop så att den hoppar ut om jag slår 4:a
         while (choise != 4){ 
+        
+        //try/catch för fånga icke siffror
+       try {
         introText();
-
         //kör scannern till egen metod för öppna den på färre ställen samt DRY
         choise = scan();
-    
+        
+       } catch (Exception e) {
+        invalidInput();
+        continue;
+       }
             //mina case går direkt till metoder enligt  DRY.
         switch (choise) {
             case 1: 
@@ -23,11 +29,23 @@ public class App {
             break;
 
             case 2: 
-                deposit();
+            //try/catch för icke siffror
+                try {
+                     deposit();
+                } catch (Exception e) {
+                     invalidInput();
+                continue;
+                 }   
             break;
 
             case 3:
+                 try {
                 withdraw();
+                 } catch (Exception e) {
+                invalidInput();
+                continue;
+                }
+                
             break;
 
             case 4:
@@ -41,7 +59,16 @@ public class App {
         } 
     }
     
-
+//klass för göra huvudklassen mer DRY. Lägger all text här.
+    public static void introText() {
+        line();
+        System.out.print("Greetings customer to Niklas Bank. ");
+        System.out.println("Would you like to:");
+        System.out.println("Check your balance?: Press 1:");
+        System.out.println("Deposit money?: Press 2:");
+        System.out.println("Witdraw money from your account?: Press 3");
+        System.out.println("Quit your bank application?: Press 4");
+}
            
     public static void checkMyBalance(){
         line();
@@ -51,12 +78,14 @@ public class App {
     public static void deposit() {
         line();
         System.out.println("How mutch would you like to deposit to your account?");
+       
         int dep = scan();
         //inga negativa siffror får knappas in. Denna if/else stoppar det
             if (dep <0) {System.out.println();
                      invalidInput();
             }else{ System.out.println("You deposited "+ dep+ " Sek. on your account.");
                 currentBalance += dep;}
+        
     }   
 
     public static void withdraw() {
@@ -65,6 +94,7 @@ public class App {
         int wit = scan();
 
         if (wit <0) {System.out.println();
+            line();
             invalidInput();
         
         }else if (wit >= currentBalance) {
@@ -82,25 +112,12 @@ public class App {
 
     public static void quit() {
         line();
-    System.out.println("Application will now quit");
+        System.out.println("Application will now quit");
     }
 
     public static void def(){
-    System.out.println("Invalid command, pleace choose 1-4");
-    }
- 
-
-//klass för göra huvudklassen mer DRY. Lägger all text här.
-    public static void introText() {
-                //lägger till linje för ökad läslighet
-                line();
-                System.out.print("Greetings customer. ");
-                System.out.println("Would you like to:");
-            
-                System.out.println("Check your balance?: Press 1:");
-                System.out.println("Deposit money?: Press 2:");
-                System.out.println("Witdraw money from your account?: Press 3");
-                System.out.println("Quit your bank application?: Press 4");
+        line();
+        System.out.println("Invalid command, pleace choose 1-4");
     }
 
     public static void invalidInput() {
@@ -108,24 +125,15 @@ public class App {
         System.out.println("Invalid input");
 
 }
-    //scanner class with inbuild 
+    //scanner metod för mer DRY
     public static int scan(){
         Scanner scanner = new Scanner(System.in);
         int input = scanner.nextInt();
  
             return input;
-       
-            
     }  
+    //hmm blev många upprepade linjer tills jag lärt mig något annat sätt varför inte en linjemetod!
     public static void line() {
         System.out.println("------------------------------");
     }
 }
-
-        
-    
-
-
-
-
-
