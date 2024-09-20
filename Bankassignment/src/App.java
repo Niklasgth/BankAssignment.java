@@ -6,30 +6,17 @@ public class App {
     static int currentBalance =0;
     
     public static void main(String[] args) {
-        //scanner för switchen
-       // Scanner choiseScanner = new Scanner(System.in);
+       
         int choise = 0;
       
-        //while loop så att den hoppar ut om jag slår 4:a likt vi gjorde i övningsuppgiften
+        //while loop så att den hoppar ut om jag slår 4:a
         while (choise != 4){ 
-
-        //kan ju också sättas till en metod för DRY
         introText();
 
-        //testar att göra scannern till egen metod för öppna den på färre ställen
+        //kör scannern till egen metod för öppna den på färre ställen samt DRY
         choise = scan();
-        
-
-       //if (choise>-1 && choise <5) {
-        //continue;
-       /*}else 
-            invalidInput();
-            choise = scan(); */
-       
     
-
-    
-            //mina case går direkt till metoder cut  dry.
+            //mina case går direkt till metoder enligt  DRY.
         switch (choise) {
             case 1: 
                 checkMyBalance(); 
@@ -48,8 +35,8 @@ public class App {
             break;
 
             default: 
-            System.out.println("Invalid command, pleace choose 1-4");
-                break;
+                def();
+            break;
             }
         } 
     }
@@ -58,30 +45,29 @@ public class App {
            
     public static void checkMyBalance(){
         line();
-    System.out.println(" Your current saldo is "+ currentBalance);
+        System.out.println(" Your current saldo is "+ currentBalance);
     }
 
     public static void deposit() {
-        //Scanner depScanner = new Scanner(System.in);
         line();
         System.out.println("How mutch would you like to deposit to your account?");
         int dep = scan();
-        //inga negativa siffror denna if/else stoppar det
+        //inga negativa siffror får knappas in. Denna if/else stoppar det
             if (dep <0) {System.out.println();
                      invalidInput();
             }else{ System.out.println("You deposited "+ dep+ " Sek. on your account.");
                 currentBalance += dep;}
-
-        
     }   
 
     public static void withdraw() {
-        //Scanner witScanner = new Scanner(System.in);
-       line();
+        line();
         System.out.println("How mutch would you like to withdraw from your account?");
         int wit = scan();
 
-        if (wit >= currentBalance) {
+        if (wit <0) {System.out.println();
+            invalidInput();
+        
+        }else if (wit >= currentBalance) {
             line();
             System.out.println("Unable to withdraw.");
             System.out.println("You do not have enough funds on your account.");
@@ -98,6 +84,12 @@ public class App {
         line();
     System.out.println("Application will now quit");
     }
+
+    public static void def(){
+    System.out.println("Invalid command, pleace choose 1-4");
+    }
+ 
+
 //klass för göra huvudklassen mer DRY. Lägger all text här.
     public static void introText() {
                 //lägger till linje för ökad läslighet
